@@ -1,0 +1,37 @@
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra & Ahorra - Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Catálogo de Productos</h2>
+        
+        <!-- Productos listados (Vista Lógica) -->
+        <div class="product-list">
+            <div class="product-card">
+                <h3>Teléfono Inteligente</h3>
+                <p>Precio: $300</p>
+                <button onclick="addToCart('Teléfono Inteligente')">Añadir al Carrito</button>
+            </div>
+            <div class="product-card">
+                <h3>Audífonos Inalámbricos</h3>
+                <p>Precio: $50</p>
+                <button onclick="addToCart('Audífonos Inalámbricos')">Añadir al Carrito</button>
+            </div>
+            <!-- Más productos pueden añadirse aquí -->
+        </div>
+    </div>
+    
+    <script>
+        function addToCart(productName) {
+            alert(productName + " añadido al carrito");
+            // Aquí puedes añadir lógica para agregar al carrito en sesión
+        }
+    </script>
+</body>
+</html>

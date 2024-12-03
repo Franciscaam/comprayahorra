@@ -1,0 +1,98 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra & Ahorra - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Menú de Navegación -->
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="products.html">Productos</a>
+        <a href="cart.html">Carrito de Compras</a>
+        <a href="inventory.html">Inventario</a>
+        <a href="history.html">Historial</a>
+        <a href="login.html">Iniciar Sesión</a>
+    </nav>
+
+    <!-- Encabezado con Banner -->
+    <header>
+        <h1>Compra & Ahorra</h1>
+        <p>Encuentra productos de calidad a precios accesibles</p>
+        <button onclick="location.href='products.html'">Explora Productos</button>
+    </header>
+
+    <!-- Carrusel de Imágenes -->
+    <div class="carousel">
+        <img src="image1.jpg" alt="Producto 1" class="active">
+        <img src="image2.jpg" alt="Producto 2">
+        <img src="image3.jpg" alt="Producto 3">
+        <div class="carousel-controls">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="container">
+        <!-- Productos Destacados -->
+        <section class="featured-products">
+            <h2>Productos Destacados</h2>
+            <div class="product-card">
+                <h3>Teléfono Inteligente</h3>
+                <p>Lo último en tecnología móvil.</p>
+                <button onclick="addToCart('Teléfono Inteligente')">Añadir al Carrito</button>
+            </div>
+            <div class="product-card">
+                <h3>Audífonos Inalámbricos</h3>
+                <p>Calidad de sonido superior.</p>
+                <button onclick="addToCart('Audífonos Inalámbricos')">Añadir al Carrito</button>
+            </div>
+        </section>
+
+        <!-- Opiniones de Clientes -->
+        <section class="customer-reviews">
+            <h2>Lo que opinan nuestros clientes</h2>
+            <div class="review-card">
+                <p>"Excelente atención y productos de calidad!"</p>
+                <span>- Juan Pérez</span>
+            </div>
+            <div class="review-card">
+                <p>"Recomendado para compras rápidas y seguras."</p>
+                <span>- María López</span>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Compra & Ahorra - Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Script de Carrusel -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        setInterval(nextSlide, 3000); // Cambia de imagen cada 3 segundos
+    </script>
+
+</body>
+</html>

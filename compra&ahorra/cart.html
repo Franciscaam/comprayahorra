@@ -1,0 +1,29 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra & Ahorra - Carrito de Compras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Carrito de Compras</h2>
+        
+        <div id="cartItems">
+            <!-- Los productos añadidos se mostrarán aquí -->
+            <p>No hay productos en el carrito.</p>
+        </div>
+        
+        <button onclick="checkout()">Proceder al Pago</button>
+    </div>
+    
+    <script>
+        function checkout() {
+            alert("Procediendo al pago...");
+            // Aquí se integraría la lógica para procesar el pago con API
+        }
+    </script>
+</body>
+</html>

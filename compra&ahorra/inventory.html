@@ -1,0 +1,51 @@
+<!-- inventory.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra & Ahorra - Gestión de Inventario</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gestión de Inventario</h2>
+        
+        <form id="inventoryForm">
+            <label for="productName">Nombre del Producto:</label>
+            <input type="text" id="productName" required>
+            
+            <label for="productPrice">Precio:</label>
+            <input type="number" id="productPrice" required>
+            
+            <label for="productStock">Stock:</label>
+            <input type="number" id="productStock" required>
+            
+            <button type="submit">Agregar Producto</button>
+        </form>
+        
+        <div id="inventoryList" class="inventory">
+            <h3>Inventario Actual</h3>
+            <!-- Aquí se muestra la lista de productos en inventario -->
+            <p>No hay productos en el inventario.</p>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById("inventoryForm").onsubmit = function (e) {
+            e.preventDefault();
+            const name = document.getElementById("productName").value;
+            const price = document.getElementById("productPrice").value;
+            const stock = document.getElementById("productStock").value;
+
+            const inventoryList = document.getElementById("inventoryList");
+            const productDiv = document.createElement("div");
+            productDiv.classList.add("product-card");
+            productDiv.innerHTML = `<h4>${name}</h4><p>Precio: $${price}</p><p>Stock: ${stock}</p>`;
+            inventoryList.appendChild(productDiv);
+            
+            document.getElementById("inventoryForm").reset();
+        };
+    </script>
+</body>
+</html>
