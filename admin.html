@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin | Compra & Ahorra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+   <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Compra & Ahorra</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
+                <li class="nav-item admin-only d-none"><a class="nav-link" href="admin.html">Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="logout">Cerrar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="carrito.html"><i class="bi bi-cart"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Contenido principal -->
+    <main class="container mt-5">
+        <h2 class="mb-4 text-center">Panel de Administración</h2>
+
+        <!-- Gestión de Productos -->
+        <section>
+            <h4>Gestión de Productos</h4>
+            <div class="text-end mb-3">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">Agregar Producto</button>
+            </div>
+            <div id="product-admin-list" class="row g-4">
+                <!-- Aquí se cargarán los productos dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para agregar producto -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Agregar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-product-form">
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoría</label>
+                            <select class="form-control" id="categoria" required>
+                                <option value="Electrodomésticos">Electrodomésticos</option>
+                                <option value="Telefonía">Telefonía</option>
+                                <option value="Ropa">Ropa</option>
+                                <option value="Libros">Libros</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre del Producto</label>
+                            <input type="text" class="form-control" id="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">Precio de Venta</label>
+                            <input type="number" class="form-control" id="precio" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precioCompra" class="form-label">Precio de Compra</label>
+                            <input type="number" class="form-control" id="precioCompra" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="stock" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fechaLlegada" class="form-label">Fecha de Llegada</label>
+                            <input type="date" class="form-control" id="fechaLlegada" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagen" class="form-label">URL de la Imagen</label>
+                            <input type="url" class="form-control" id="imagen" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Guardar Producto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar producto -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Editar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-product-form">
+                        <input type="hidden" id="edit-id">
+                        <div class="mb-3">
+                            <label for="edit-categoria" class="form-label">Categoría</label>
+                            <select class="form-control" id="edit-categoria" required>
+                                <option value="Electrodomésticos">Electrodomésticos</option>
+                                <option value="Telefonía">Telefonía</option>
+                                <option value="Ropa">Ropa</option>
+                                <option value="Libros">Libros</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-nombre" class="form-label">Nombre del Producto</label>
+                            <input type="text" class="form-control" id="edit-nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="edit-descripcion" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-precio" class="form-label">Precio de Venta</label>
+                            <input type="number" class="form-control" id="edit-precio" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-precioCompra" class="form-label">Precio de Compra</label>
+                            <input type="number" class="form-control" id="edit-precioCompra" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-stock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="edit-stock" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-fechaLlegada" class="form-label">Fecha de Llegada</label>
+                            <input type="date" class="form-control" id="edit-fechaLlegada" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-imagen" class="form-label">URL de la Imagen</label>
+                            <input type="url" class="form-control" id="edit-imagen" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script type="module" src="js/admin.js"></script>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>© 2024 Compra & Ahorra. Todos los derechos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
