@@ -79,7 +79,6 @@ async function editarProducto(productId) {
     }
 }
 
-// Función para registrar una venta
 async function registrarVenta(productId, stockDisponible, precioVenta) {
     const cantidadVendida = parseInt(prompt('Ingrese la cantidad vendida:'), 10);
     if (isNaN(cantidadVendida) || cantidadVendida <= 0 || cantidadVendida > stockDisponible) {
@@ -113,6 +112,7 @@ async function registrarVenta(productId, stockDisponible, precioVenta) {
         alert(`Error al registrar la venta: ${error.message}`);
     }
 }
+
 
 // Hacer las funciones accesibles desde el HTML
 window.deleteProduct = deleteProduct;
