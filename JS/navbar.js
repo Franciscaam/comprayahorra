@@ -19,7 +19,6 @@ onAuthStateChanged(auth, async (user) => {
         window.location.href = 'login.html';
     }
 });
-
 // Manejo de cierre de sesión
 document.getElementById('logout').addEventListener('click', async () => {
     try {

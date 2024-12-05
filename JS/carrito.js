@@ -31,7 +31,6 @@ function renderCarrito() {
         `;
     });
 }
-
 // Eliminar producto del carrito
 function eliminarDelCarrito(id) {
     let carrito = cargarCarrito();

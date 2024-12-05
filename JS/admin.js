@@ -34,7 +34,6 @@ async function renderAdminProducts() {
         `;
     });
 }
-
 async function deleteProduct(productId) {
     try {
         await deleteDoc(doc(db, 'productos', productId));

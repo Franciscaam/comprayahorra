@@ -26,8 +26,6 @@ function mostrarInformacionUsuario(user) {
             console.error('Error al obtener datos del usuario:', error);
         });
 }
-
-
 // Mostrar historial de compras
 async function mostrarHistorialCompras(userId) {
     const historialContainer = document.getElementById('historial-compras');

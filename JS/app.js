@@ -1,4 +1,4 @@
-// app.js
+
 import { db } from './firebase-config.js';
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
