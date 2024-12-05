@@ -94,7 +94,7 @@ async function registrarVenta(productId, stockDisponible, precioVenta) {
     try {
         // Registrar la venta en Firestore
         await addDoc(collection(db, 'ventas'), {
-            productoId: productId,
+            productId, // Usar productId correctamente
             cantidadVendida,
             precioVenta,
             iva,
