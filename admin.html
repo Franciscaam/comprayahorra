@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>Panel Admin | Compra & Ahorra</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
@@ -158,10 +159,51 @@
     <!-- Bootstrap JS -->
     <script type="module" src="js/admin.js"></script>
 
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="module" src="js/admin.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Compra & Ahorra</a>
+        </div>
+    </nav>
+
+    <!-- Panel Administrativo -->
+    <div class="container mt-5">
+        <h2 class="text-center">Panel Administrativo</h2>
+        <div class="d-flex justify-content-between mb-4">
+            <button id="add-product" class="btn btn-success">Agregar Producto</button>
+            <button id="export-data" class="btn btn-warning">Exportar Datos</button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="admin-product-list"></tbody>
+        </table>
+    </div>
+
+>>>>>>> adfec6722ea876cee011ad0804b08833ba4cf0da
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3 mt-5">
         <p>© 2024 Compra & Ahorra. Todos los derechos reservados.</p>
     </footer>
+<<<<<<< HEAD
+=======
+
+>>>>>>> adfec6722ea876cee011ad0804b08833ba4cf0da
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
