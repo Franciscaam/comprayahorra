@@ -9,31 +9,38 @@ import {
     getDoc,
 } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js';
 
+// Renderizar lista de productos en el panel de administración
 async function renderAdminProducts() {
-    const productosSnapshot = await getDocs(collection(db, 'productos'));
-    const productos = productosSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    const adminList = document.getElementById('product-admin-list');
-    adminList.innerHTML = '';
-    productos.forEach((producto) => {
-        adminList.innerHTML += `
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
-                    <div class="card-body">
-                        <h5>${producto.nombre}</h5>
-                        <p><strong>Categoría:</strong> ${producto.categoria}</p>
-                        <p><strong>Descripción:</strong> ${producto.descripcion}</p>
-                        <p><strong>Precio de Venta:</strong> $${producto.precio}</p>
-                        <p><strong>Stock:</strong> ${producto.stock}</p>
-                        <button class="btn btn-primary" onclick="editarProducto('${producto.id}')">Editar</button>
-                        <button class="btn btn-danger mt-2" onclick="deleteProduct('${producto.id}')">Eliminar</button>
-                        <button class="btn btn-warning mt-2" onclick="registrarVenta('${producto.id}', ${producto.stock}, ${producto.precio})">Registrar Venta</button>
+    try {
+        const productosSnapshot = await getDocs(collection(db, 'productos'));
+        const productos = productosSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const adminList = document.getElementById('product-admin-list');
+        adminList.innerHTML = '';
+        productos.forEach((producto) => {
+            adminList.innerHTML += `
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+                        <div class="card-body">
+                            <h5>${producto.nombre}</h5>
+                            <p><strong>Categoría:</strong> ${producto.categoria}</p>
+                            <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+                            <p><strong>Precio de Venta:</strong> $${producto.precio}</p>
+                            <p><strong>Stock:</strong> ${producto.stock}</p>
+                            <button class="btn btn-primary" onclick="editarProducto('${producto.id}')">Editar</button>
+                            <button class="btn btn-danger mt-2" onclick="deleteProduct('${producto.id}')">Eliminar</button>
+                            <button class="btn btn-warning mt-2" onclick="registrarVenta('${producto.id}', ${producto.stock}, ${producto.precio})">Registrar Venta</button>
+                        </div>
                     </div>
-
-            </div>
-        `;
-    });
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error('Error al renderizar los productos:', error.message);
+    }
 }
+
+// Función para eliminar producto
 async function deleteProduct(productId) {
     try {
         await deleteDoc(doc(db, 'productos', productId));
@@ -45,6 +52,7 @@ async function deleteProduct(productId) {
     }
 }
 
+// Función para editar producto
 async function editarProducto(productId) {
     try {
         const productDoc = await getDoc(doc(db, 'productos', productId));
@@ -71,6 +79,7 @@ async function editarProducto(productId) {
     }
 }
 
+// Función para registrar una venta
 async function registrarVenta(productId, stockDisponible, precioVenta) {
     const cantidadVendida = parseInt(prompt('Ingrese la cantidad vendida:'), 10);
     if (isNaN(cantidadVendida) || cantidadVendida <= 0 || cantidadVendida > stockDisponible) {
@@ -85,7 +94,7 @@ async function registrarVenta(productId, stockDisponible, precioVenta) {
     try {
         // Registrar la venta en Firestore
         await addDoc(collection(db, 'ventas'), {
-            productoId,
+            productoId: productId,
             cantidadVendida,
             precioVenta,
             iva,
@@ -110,20 +119,5 @@ window.deleteProduct = deleteProduct;
 window.editarProducto = editarProducto;
 window.registrarVenta = registrarVenta;
 
-    await deleteDoc(doc(db, 'productos', productId));
-    alert('Producto eliminado');
-    renderAdminProducts();
-
-
-document.getElementById('add-product').addEventListener('click', async () => {
-    const nombre = prompt('Nombre del producto:');
-    const descripcion = prompt('Descripción:');
-    const precio = parseFloat(prompt('Precio:'));
-    const imagen = prompt('URL de la imagen:');
-    await addDoc(collection(db, 'productos'), { nombre, descripcion, precio, imagen });
-    alert('Producto agregado');
-    renderAdminProducts();
-});
-
-
+// Renderizar productos al cargar la página
 renderAdminProducts();
