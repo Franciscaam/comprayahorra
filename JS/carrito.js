@@ -13,17 +13,16 @@ function guardarCarrito(carrito) {
 function renderCarrito() {
     const carrito = cargarCarrito();
     const carritoContainer = document.getElementById('carrito-container');
-    const totalContainer = document.getElementById('total-container');
+    const totalElement = document.getElementById('total');
+    let total = 0;
+
     carritoContainer.innerHTML = '';
-    totalContainer.innerHTML = '';
 
     if (carrito.length === 0) {
         carritoContainer.innerHTML = '<p class="text-center">El carrito está vacío.</p>';
-        totalContainer.innerHTML = '<p class="text-center">Total: $0</p>';
+        totalElement.textContent = 'Total: $0 CLP';
         return;
     }
-
-    let total = 0;
 
     carrito.forEach(producto => {
         const subtotal = producto.precio * producto.cantidad;
@@ -44,15 +43,18 @@ function renderCarrito() {
         `;
     });
 
-    totalContainer.innerHTML = `<p class="text-end fw-bold">Total: $${total}</p>`;
+    totalElement.textContent = `Total: $${total.toLocaleString()} CLP`;
+
+    // Actualizar el valor para PayPal (en dólares, por ejemplo: convertir de CLP a USD)
+    const usdConversionRate = 0.0013; // Aproximadamente 1 CLP a USD
+    const paypalAmount = total * usdConversionRate;
+    document.getElementById('paypal-amount').value = paypalAmount.toFixed(2);
 }
 
 // Eliminar producto del carrito
 function eliminarDelCarrito(id) {
     let carrito = cargarCarrito();
     carrito = carrito.filter(producto => producto.id !== id);
-
-    // Guardar cambios en localStorage
     guardarCarrito(carrito);
     renderCarrito();
 }
@@ -66,13 +68,14 @@ document.getElementById('finalizar-compra').addEventListener('click', () => {
         return;
     }
 
-    // Aquí puedes agregar lógica adicional para registrar la compra en una base de datos si es necesario.
-
     // Limpiar carrito
     localStorage.removeItem('carrito');
     alert('Compra realizada con éxito.');
     renderCarrito();
 });
+
+// Hacer las funciones accesibles globalmente para el HTML
+window.eliminarDelCarrito = eliminarDelCarrito;
 
 // Inicializar la página del carrito
 renderCarrito();
